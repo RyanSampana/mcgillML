@@ -120,7 +120,7 @@ Y_test = np_utils.to_categorical(y_test, nb_classes)
 model = Sequential()
 
 # layer 1
-model.add(Convolution2D(16, kernel_size[0], kernel_size[1],
+model.add(Convolution2D(32, kernel_size[0], kernel_size[1],
                         border_mode='valid',
                         input_shape=input_shape))
 
@@ -128,16 +128,16 @@ model.add(Activation('relu'))
 
 
 # layer 2
-model.add(Convolution2D(32, kernel_size[0], kernel_size[1]))
+model.add(Convolution2D(64, kernel_size[0], kernel_size[1]))
 model.add(Activation('relu'))
 
 # layer 3 we down size
-model.add(Convolution2D(32, kernel_size[0], kernel_size[1]))
+model.add(Convolution2D(64, kernel_size[0], kernel_size[1]))
 model.add(Activation('relu'))
 
 # lots of layers addition
 for i in range(5):
-    model.add(Convolution2D(64, kernel_size_small[0], kernel_size_small[1]))
+    model.add(Convolution2D(128, kernel_size_small[0], kernel_size_small[1]))
     model.add(Activation('relu'))
 
 # max pooling 1
