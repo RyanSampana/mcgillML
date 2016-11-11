@@ -141,12 +141,13 @@ for i in range(5):
     model.add(Activation('relu'))
 
 # max pooling 1
-# model.add(MaxPooling2D(pool_size=pool_size))
-# model.add(Dropout(0.25))
+model.add(MaxPooling2D(pool_size=pool_size))
+model.add(Dropout(0.25))
 
 # layer 4
 model.add(Convolution2D(256, kernel_size_small[0], kernel_size_very_small[1]))
 model.add(Activation('relu'))
+
 
 model.add(Convolution2D(256, kernel_size_small[0], kernel_size_very_small[1]))
 model.add(Activation('relu'))
