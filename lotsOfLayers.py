@@ -78,7 +78,7 @@ y_train = out_y[:max_examples]
 X_test = out_x[max_examples:]
 y_test = out_y[max_examples:]
 
-batch_size = 32
+batch_size = 128
 nb_classes = 19
 nb_epoch = 100
 
@@ -91,6 +91,8 @@ pool_size = (2, 2)
 kernel_size = (5, 5)
 # convolution kernel size small
 kernel_size_small = (3, 3)
+# convolution kernel size very small
+kernel_size_very_small = (2,2)
 
 if K.image_dim_ordering() == 'th':
     X_train = X_train.reshape(X_train.shape[0], 1, img_rows, img_cols)
@@ -124,10 +126,6 @@ model.add(Convolution2D(16, kernel_size[0], kernel_size[1],
 
 model.add(Activation('relu'))
 
-for i in range(2):
-	model.add(Convolution2D(32, kernel_size[0], kernel_size[1]))
-	model.add(Activation('relu'))
-
 
 # layer 2
 model.add(Convolution2D(32, kernel_size[0], kernel_size[1]))
@@ -137,15 +135,20 @@ model.add(Activation('relu'))
 model.add(Convolution2D(32, kernel_size[0], kernel_size[1]))
 model.add(Activation('relu'))
 
+# lots of layers addition
+for i in range(5):
+    model.add(Convolution2D(64, kernel_size_small[0], kernel_size_small[1]))
+    model.add(Activation('relu'))
+
 # max pooling 1
 # model.add(MaxPooling2D(pool_size=pool_size))
 # model.add(Dropout(0.25))
 
 # layer 4
-model.add(Convolution2D(256, kernel_size_small[0], kernel_size_small[1]))
+model.add(Convolution2D(256, kernel_size_very_small[0], kernel_size_very_small[1]))
 model.add(Activation('relu'))
 
-model.add(Convolution2D(256, kernel_size_small[0], kernel_size_small[1]))
+model.add(Convolution2D(256, kernel_size_very_small[0], kernel_size_very_small[1]))
 model.add(Activation('relu'))
 
 # max pooling 2
@@ -160,7 +163,7 @@ model.add(Dense(256))
 model.add(Activation('relu'))
 
 # 2nd dense layer
-model.add(Dense(512))
+model.add(Dense(256))
 model.add(Activation('relu'))
 
 # class dense layer
