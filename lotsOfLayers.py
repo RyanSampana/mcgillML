@@ -124,7 +124,7 @@ model.add(Convolution2D(16, kernel_size[0], kernel_size[1],
 
 model.add(Activation('relu'))
 
-for i in range(5):
+for i in range(2):
 	model.add(Convolution2D(32, kernel_size[0], kernel_size[1]))
 	model.add(Activation('relu'))
 
